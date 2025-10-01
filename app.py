@@ -62,6 +62,20 @@ def crear_producto():
 
     return render_template('crear_producto.html')
 
+#EDitar
+@app.route('/productos/editar/<int:id>', methods=['GET', 'POST'])
+def editar_producto(id):
+    producto = Producto.query.get_or_404(id)
+    if request.method == 'POST':
+        producto.nombre = request.form['nombre']
+        producto.descripcion = request.form['descripcion']
+        producto.precio = request.form['precio']
+        producto.stock = request.form['stock']
+        producto.categoria_id = request.form['categoria_id']
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('editar.html', producto=producto)
+
 #Ruta /tienda
 @app.route('/tienda')
 def getTienda():

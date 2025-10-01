@@ -29,8 +29,10 @@
             <td>${{ producto.precio }}</td>
             <td>{{ producto.stock }}</td>
             <td>{{ producto.categoria_id }}</td>
-            
-            
+            <td>
+                
+                <a href="{{ url_for('editar_producto', id=producto.id) }}" class="btn btn-warning">Actualizar</a>
+            </td>
         </tr>
         {% else %}
         <tr>
