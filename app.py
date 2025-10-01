@@ -38,6 +38,30 @@ def index():
     productos = Producto.query.all()
     return render_template('index.html', productos=productos)
 
+#Endpoint  para crear producto
+@app.route('/productos/crear', methods=['GET', 'POST'])
+def crear_producto():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        descripcion = request.form['descripcion']
+        precio = float(request.form['precio'])
+        stock = int(request.form['stock'])
+        categoria_id = int(request.form['categoria_id'])
+
+        nuevo_producto = Producto(
+            nombre=nombre,
+            descripcion=descripcion,
+            precio=precio,
+            stock=stock,
+            categoria_id=categoria_id
+        )
+
+        db.session.add(nuevo_producto)
+        db.session.commit()
+        return redirect(url_for('index'))  # Redirige a la lista de productos
+
+    return render_template('crear_producto.html')
+
 #Ruta /tienda
 @app.route('/tienda')
 def getTienda():
