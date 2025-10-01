@@ -76,6 +76,15 @@ def editar_producto(id):
         return redirect(url_for('index'))
     return render_template('editar.html', producto=producto)
 
+#eliminar
+@app.route('/productos/eliminar/<int:id>')
+def eliminar_producto(id):
+    producto = Producto.query.get(id)
+    if producto:
+        db.session.delete(producto)
+        db.session.commit()
+    return redirect(url_for('index'))
+
 #Ruta /tienda
 @app.route('/tienda')
 def getTienda():
