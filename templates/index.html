@@ -4,42 +4,46 @@
 
 {% block content %}
 
-<a href="{{ url_for('crear_producto') }}" class="btn btn-success mb-3">Agregar producto</a>
+<a href="{{ url_for('crear_producto') }}" class="button is-success mb-3">Agregar producto</a>
 
-<h1>Lista de Productos</h1>
+<h1 class="title is-3 mt-4">Lista de Productos</h1>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoría</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for producto in productos %}
-        <tr>
-            <td>{{ producto.id }}</td>
-            <td>{{ producto.nombre }}</td>
-            <td>{{ producto.descripcion }}</td>
-            <td>${{ producto.precio }}</td>
-            <td>{{ producto.stock }}</td>
-            <td>{{ producto.categoria_id }}</td>
-            <td>
-                <a href="{{ url_for('eliminar_producto', id=producto.id) }}" class="btn btn-danger">Eliminar</a>
-                <a href="{{ url_for('editar_producto', id=producto.id) }}" class="btn btn-warning">Actualizar</a>
-            </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="7">No hay productos registrados</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-container">
+  <table class="table is-bordered is-fullwidth is-hoverable">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Categoría</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for producto in productos %}
+          <tr>
+              <td>{{ producto.id }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ producto.descripcion }}</td>
+              <td>${{ producto.precio }}</td>
+              <td>{{ producto.stock }}</td>
+              <td>{{ producto.categoria_id }}</td>
+              <td>
+                  <div class="buttons">
+                    <a href="{{ url_for('eliminar_producto', id=producto.id) }}" class="button is-danger is-small">Eliminar</a>
+                    <a href="{{ url_for('editar_producto', id=producto.id) }}" class="button is-warning is-small">Actualizar</a>
+                  </div>
+              </td>
+          </tr>
+          {% else %}
+          <tr>
+              <td colspan="7" class="has-text-centered">No hay productos registrados</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
 
 {% endblock %}
